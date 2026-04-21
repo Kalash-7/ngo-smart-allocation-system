@@ -1,0 +1,8 @@
+{
+  "name": "NGO smart allocation system",
+  "description": "A community coordination platform that matches volunteers with local needs and uses AI to digitize paper survey forms.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": []
+}

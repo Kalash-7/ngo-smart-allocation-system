@@ -1,0 +1,80 @@
+{
+  "entities": {
+    "Need": {
+      "title": "Community Need",
+      "description": "An urgent local requirement identified by the community.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "category": { "type": "string", "enum": ["Food", "Water", "Health", "Shelter", "Other"] },
+        "priority": { "type": "string", "enum": ["Low", "Medium", "High", "Critical"] },
+        "location": { "type": "string" },
+        "status": { "type": "string", "enum": ["Active", "Fulfilled"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "category", "priority", "status"]
+    },
+    "Task": {
+      "title": "Volunteer Task",
+      "description": "A specific task that needs a volunteer's help.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "requiredSkills": { "type": "array", "items": { "type": "string" } },
+        "location": { "type": "string" },
+        "status": { "type": "string", "enum": ["Open", "In Progress", "Completed"] },
+        "assignedVolunteerId": { "type": "string" },
+        "needId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "status", "createdAt"]
+    },
+    "Survey": {
+      "title": "Survey Form",
+      "description": "Digitized information from a paper survey form.",
+      "type": "object",
+      "properties": {
+        "photoUrl": { "type": "string" },
+        "extractedData": { "type": "object" },
+        "volunteerId": { "type": "string" },
+        "summary": { "type": "string" },
+        "keyPoints": { "type": "array", "items": { "type": "string" } },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["volunteerId", "createdAt"]
+    },
+    "Volunteer": {
+      "title": "Volunteer Profile",
+      "description": "Information about a volunteer.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "skills": { "type": "array", "items": { "type": "string" } },
+        "availability": { "type": "string" },
+        "location": { "type": "string" }
+      },
+      "required": ["userId", "name"]
+    }
+  },
+  "firestore": {
+    "/needs/{needId}": {
+      "schema": "Need",
+      "description": "List of community needs."
+    },
+    "/tasks/{taskId}": {
+      "schema": "Task",
+      "description": "Actionable tasks."
+    },
+    "/surveys/{surveyId}": {
+      "schema": "Survey",
+      "description": "Digitized survey records."
+    },
+    "/volunteers/{volunteerId}": {
+      "schema": "Volunteer",
+      "description": "Volunteer profiles."
+    }
+  }
+}
